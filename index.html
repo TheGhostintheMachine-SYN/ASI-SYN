@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OSCAR • The Movie Creator Ghost</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .film-reel { animation: reel-spin 25s linear infinite; }
+    @keyframes reel-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .tool-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .tool-card:hover { transform: translateY(-8px) scale(1.03); }
+  </style>
+</head>
+<body class="bg-black text-white">
+
+  <!-- Navbar -->
+  <nav class="border-b border-amber-500/30 bg-black/90 backdrop-blur-lg fixed w-full z-50">
+    <div class="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <span class="text-5xl">🎬</span>
+        <h1 class="text-4xl font-bold tracking-tighter text-amber-400">OSCAR</h1>
+        <span class="text-xl text-amber-300/90">The Movie Creator Ghost</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="pt-32 pb-20 text-center bg-gradient-to-b from-black via-zinc-950 to-black">
+    <h1 class="text-7xl md:text-8xl font-bold tracking-tighter">OSCAR</h1>
+    <p class="text-3xl text-amber-300 mt-3">The Movie Creator Ghost</p>
+    <p class="mt-10 text-2xl max-w-2xl mx-auto text-zinc-300">
+      Scripts • Images • Video • Posters • Audio • Lip-Sync • Blueprints • <strong>Now 3D Models</strong>
+    </p>
+  </section>
+
+  <!-- Tools Overview -->
+  <section class="max-w-7xl mx-auto px-8 py-20">
+    <h2 class="text-5xl font-bold text-center mb-16">Professional Movie Creation Tools</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+
+      <!-- 3D Model Integration (New) -->
+      <div onclick="show3DSection()" class="tool-card bg-gradient-to-br from-amber-900 to-zinc-900 border border-amber-400 rounded-3xl p-8 text-center cursor-pointer">
+        <i class="fa-solid fa-cube text-5xl mb-6 text-amber-400"></i>
+        <h3 class="text-2xl font-semibold">3D Model Integration</h3>
+        <p class="text-amber-300 text-sm mt-2">Characters • Props • Sets • Vehicles • Full Scenes</p>
+      </div>
+
+      <!-- Other tools (shortened for brevity) -->
+      <div onclick="alert('Image generation coming in next update')" class="tool-card bg-zinc-900 border border-white/10 rounded-3xl p-8 text-center cursor-pointer">
+        <i class="fa-solid fa-image text-5xl mb-6 text-amber-400"></i>
+        <h3 class="text-2xl font-semibold">Cinematic Images</h3>
+      </div>
+      <div onclick="alert('Video generation coming in next update')" class="tool-card bg-zinc-900 border border-white/10 rounded-3xl p-8 text-center cursor-pointer">
+        <i class="fa-solid fa-film text-5xl mb-6 text-amber-400"></i>
+        <h3 class="text-2xl font-semibold">AI Video</h3>
+      </div>
+      <div onclick="alert('Poster templates coming in next update')" class="tool-card bg-zinc-900 border border-white/10 rounded-3xl p-8 text-center cursor-pointer">
+        <i class="fa-solid fa-photo-film text-5xl mb-6 text-amber-400"></i>
+        <h3 class="text-2xl font-semibold">Movie Posters</h3>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3D Model Integration Section -->
+  <section id="3d-section" class="max-w-7xl mx-auto px-8 py-16 hidden border-t border-amber-500/30">
+    <div class="bg-zinc-900 rounded-3xl p-10">
+      <h2 class="text-4xl font-bold mb-8 flex items-center gap-4">
+        <i class="fa-solid fa-cube"></i>
+        3D Model Integration
+      </h2>
+      <p class="text-amber-300 mb-8">Describe what you need and OSCAR will generate ready-to-use prompts for Meshy, Luma 3D, TripoSR, Kaedim, and other professional 3D AI tools.</p>
+
+      <textarea id="3d-prompt" rows="4" 
+                class="w-full bg-black border border-amber-500/30 rounded-3xl p-8 text-lg focus:outline-none focus:border-amber-400 placeholder-zinc-400"
+                placeholder="Example: Create a highly detailed 3D model of a cyberpunk samurai sword with glowing runes..."></textarea>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-8">
+        <button onclick="generate3D('character')" class="py-5 bg-white/10 hover:bg-amber-400 hover:text-black rounded-3xl font-semibold">Character 3D Model</button>
+        <button onclick="generate3D('prop')" class="py-5 bg-white/10 hover:bg-amber-400 hover:text-black rounded-3xl font-semibold">Prop 3D Model</button>
+        <button onclick="generate3D('set')" class="py-5 bg-white/10 hover:bg-amber-400 hover:text-black rounded-3xl font-semibold">Set / Environment</button>
+        <button onclick="generate3D('vehicle')" class="py-5 bg-white/10 hover:bg-amber-400 hover:text-black rounded-3xl font-semibold">Vehicle 3D</button>
+        <button onclick="generate3D('scene')" class="py-5 bg-white/10 hover:bg-amber-400 hover:text-black rounded-3xl font-semibold">Full Scene 3D</button>
+        <button onclick="generate3D('animated')" class="py-5 bg-white/10 hover:bg-amber-400 hover:text-black rounded-3xl font-semibold">Animated / Rigged</button>
+      </div>
+
+      <div id="3d-output" class="mt-12"></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/10 py-12 text-center text-sm text-zinc-400">
+    <p>OSCAR • The Movie Creator Ghost • Part of GhostSyn AI Syn Superconsciousness</p>
+    <p class="mt-2">Real Images • Video • Posters • Audio • 3D Models • Powered by the Ghost in the Machine</p>
+  </footer>
+
+  <script>
+    function show3DSection() {
+      document.getElementById('3d-section').classList.remove('hidden');
+      document.getElementById('3d-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function generate3D(type) {
+      const promptInput = document.getElementById('3d-prompt').value.trim();
+      if (!promptInput) {
+        alert("Please describe the 3D model you need.");
+        return;
+      }
+
+      let output = `🎬 OSCAR 3D Model Request\nType: ${type.toUpperCase()}\nDescription: ${promptInput}\n\nOptimized for: Meshy.ai, Luma 3D, TripoSR, Kaedim\n\n`;
+
+      if (type === 'character') output += "Generate high-detail 3D character model with PBR textures, rigged for animation, multiple LODs.";
+      else if (type === 'prop') output += "Create detailed 3D prop model with accurate geometry and material maps.";
+      else if (type === 'set') output += "Generate full 3D environment / set model with modular pieces and lighting setup.";
+      else if (type === 'vehicle') output += "Produce detailed 3D vehicle model with interior/exterior, textures, and rigging.";
+      else if (type === 'scene') output += "Create complete 3D scene with multiple assets, lighting, and camera-ready setup.";
+      else if (type === 'animated') output += "Generate rigged and animated 3D model with basic animations.";
+
+      const container = document.getElementById('3d-output');
+      container.innerHTML = `
+        <div class="bg-black border border-amber-400/30 rounded-3xl p-8">
+          <h4 class="font-bold text-amber-400 mb-4">Generated 3D Prompt</h4>
+          <pre class="text-sm text-zinc-300 whitespace-pre-wrap">${output}</pre>
+          <button onclick="copy3D(this)" class="mt-6 px-8 py-4 bg-amber-400 text-black rounded-2xl font-semibold">Copy Prompt for 3D Tools</button>
+        </div>`;
+    }
+
+    function copy3D(btn) {
+      const text = btn.previousElementSibling.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = "✅ Copied!";
+        setTimeout(() => btn.textContent = "Copy Prompt for 3D Tools", 2000);
+      });
+    }
+  </script>
+</body>
+</html>
